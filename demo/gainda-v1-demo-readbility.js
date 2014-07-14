@@ -17,7 +17,7 @@ var app = Gaint.application(options);
 */
 app.view({
 			name:'loginView',
-			make:function(){
+			content:function(){
 				var application = this.application;
 				var button = new Button();
 				button.text = 'Yeah! Clik Me';
@@ -32,7 +32,7 @@ app.view({
 app.view({
 			tile:'home',
 			name:'homeView',
-			make:function(){
+			content:function(){
 				var application = this.application;
 				var button = new Button();
 				button.text = 'Home Button';
@@ -51,7 +51,7 @@ app.view({
 
 app.tile({
 			name:'landing',
-			make:function(){
+			content:function(){
 				var pane = new StackPane();
 				pane.title = "Landing"; 
 				return new Scene(pane,500,500);
@@ -60,7 +60,7 @@ app.tile({
 
 app.tile({
 			name:'home',
-			make:function(){
+			content:function(){
 				var pane = new StackPane();
 				pane.title = "Home"; 
 				return new Scene(pane,500,500);
