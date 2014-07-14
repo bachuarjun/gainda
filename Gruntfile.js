@@ -25,7 +25,7 @@ module.exports = function (grunt) {
                 stripBanners: true
             },
             dist: {
-                src: ['src/gainda.core.js'],
+                src: ['src/gainda-v1.js'],
                 dest: 'dist/gainda.js'
             }
         },
@@ -82,7 +82,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     grunt.registerTask('run', "Run NashornFX", function() {
-         shell.exec('jjs -fx demo/Button.js');
+         shell.exec('jjs -fx demo/gainda-v1-demo-readbility.js');
     });
 
     // Default task
