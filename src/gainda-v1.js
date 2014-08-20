@@ -34,11 +34,13 @@
 			/*private variable for returned object form this function*/
 			var requiredModules = [].concat(options.uses);		
 			var HashMap = Java.type("java.util.HashMap"); 
+			//var WeakHashMap = Java.type("java.util.WeakHashMap"); 
 			return {
 				
 				appName:options.appName,
 				tiles: new HashMap(),
 				views: new HashMap(),
+				screens:new HashMap(),
 
 				init:function(){
 					print("Init...");
@@ -61,6 +63,10 @@
 						content:options.content
 					};
 					app.tiles.put(options.name,tileDef);
+				},
+				getTile:function(tileName){
+					var app = this;
+					return app.tiles.get(tileName).content();
 				},
 				getView:function(viename){
 					return this.views.get(viename);
@@ -88,8 +94,43 @@
 					var app = this;
 					app.init();
 					options.onStartup.apply(app,[]);
-				}
-			};
+				},
+				screen:function(options){
+					var app = this;
+					var screendef = {};
+					screendef.tiles = [];
+					if(options && typeof options =="object"){
+						screendef.tiles = screendef.tiles.concat(options.tiles);
+						screendef.layout = options.layout;
+						screendef.getPart = function(name){
+							return this.parts[name];
+						};
+						app.screens.put(options.name,screendef);
+						
+
+					}
+				},
+				renderScreen:function(screenname){
+					var app = this;
+					var scr = app.screens.get(screenname);
+					var injects = [$STAGE];
+					var tiles = scr.tiles;
+					scr.parts = {};
+
+					//print("rSC"+scr.tiles);
+					for(i in tiles){
+						print("tile"+i);
+						var til = app.getTile(tiles[i]);
+
+						injects.push(til);
+						scr.parts[tiles[i]] = til; 
+					}
+					//print("rSC"+ injects.length);
+					scr.layout.apply(app,injects);
+					}
+
+
+			}
 		}
 	}
 })(this);

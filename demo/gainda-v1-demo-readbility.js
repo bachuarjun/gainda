@@ -22,6 +22,7 @@ app.view({
 				var button = new Button();
 				button.text = 'Yeah! Clik Me';
 				button.onAction = function() {
+					
 					application.render("home","homeView");
 					print("from login view working !!!")
 				}

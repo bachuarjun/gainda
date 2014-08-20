@@ -82,7 +82,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     grunt.registerTask('run', "Run NashornFX", function() {
-         shell.exec('jjs -fx demo/gainda-v1-demo-readbility.js');
+         shell.exec('jjs -fx demo/mileStone2.js');
     });
 
     // Default task
